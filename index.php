@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>TO DO LIST</title>
 </head>
 <body>
-    <form action='index.php' method='POST'>
+
+    <h1>To Do List</h1>
+
+    <form class='add-to_do' action='index.php' method='POST'>
         <input type="text" name="texto" id="texto">
-        <input type="submit" value="añadir pendiente">
+        <input type="submit" value="añadir pendiente" class='añadir_texto'>
     </form>
 
     <div id="mostrar-todo-container">
         <form id="formMostrarTodo" action="index.php" method="POST">
-            <input type="checkbox" name="mostrar-todo" onchange="mostrarTodo(this)" 
+            <input class='mostrar-todo' type="checkbox" name="mostrar-todo" onchange="mostrarTodo(this)" 
             <?php if (isset($_POST['mostrar-todo'])) {
                 if ($_POST['mostrar-todo'] == 'on') {
                     echo "checked";
@@ -84,20 +88,22 @@
             $resultado = $Connection->query($sql);
             if ($resultado->num_rows > 0) {
                 echo '<h2>Tareas por completar</h2>'; 
+                echo '<div class="tareas-completadas">';
                 while ($row = $resultado->fetch_assoc()) {
                     ?>
-                    <div>
-                        <form method='POST' id='form<?php echo $row['id']; ?>' action=""> 
-                            <input name="completar" value="<?php echo $row['id']; ?>" id="<?php echo $row['id']; ?>" type="checkbox" onchange="completarPendiente(this)" <?php if($row['completado'] == 1) echo " checked disabled "; ?>>   <?php echo $row['texto']; ?>
-                            <div class="texto <?php if($row['completado'] == 1) echo "desabilitado"; ?>"></div>
+                    <div class='lista-de-tareas'>
+                        <form method='POST' class='tarea' id='form<?php echo $row['id']; ?>' action=""> 
+                            <input name="completar" value="<?php echo $row['id']; ?>" id="<?php echo $row['id']; ?>" type="checkbox" onchange="completarPendiente(this)" <?php if($row['completado'] == 1) echo " checked disabled "; ?>>   
+                            <div class="texto <?php if($row['completado'] == 1) echo "desabilitado"; ?>"> <?php echo $row['texto']; ?> </div>
                         </form>
                         <form method='POST' id='form_eliminar<?php echo $row['id']; ?>' action="index.php">
                             <input type="hidden" name="eliminar" value="<?php echo $row['id']; ?>">
-                            <input type="submit" value="eliminar">
+                            <input type="submit" value="eliminar" class='eliminar-tarea'>
                         </form>
                     </div>
                     <?php
                 }
+                echo '</div>';
             }
 
             //Obtener datos de las tareas completadas

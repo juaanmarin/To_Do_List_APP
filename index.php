@@ -24,7 +24,9 @@
                     echo "checked";
                 }
             } ?>
-            >mostrar todo            
+            ><div class='mostrar-todo-texto'>
+                mostrar todo            
+            </div> 
         </form>
     </div>
 
@@ -93,7 +95,7 @@
                     ?>
                     <div class='lista-de-tareas'>
                         <form method='POST' class='tarea' id='form<?php echo $row['id']; ?>' action=""> 
-                            <input name="completar" value="<?php echo $row['id']; ?>" id="<?php echo $row['id']; ?>" type="checkbox" onchange="completarPendiente(this)" <?php if($row['completado'] == 1) echo " checked disabled "; ?>>   
+                            <input class='completar' name="completar" value="<?php echo $row['id']; ?>" id="<?php echo $row['id']; ?>" type="checkbox" onchange="completarPendiente(this)" <?php if($row['completado'] == 1) echo " checked disabled "; ?>>   
                             <div class="texto <?php if($row['completado'] == 1) echo "desabilitado"; ?>"> <?php echo $row['texto']; ?> </div>
                         </form>
                         <form method='POST' id='form_eliminar<?php echo $row['id']; ?>' action="index.php">

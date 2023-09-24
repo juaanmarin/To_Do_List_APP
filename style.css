@@ -89,3 +89,17 @@ h1{
     color: rgb(255, 255, 255);
     background-color: rgb(253, 76, 76);
 }
+.completar{
+    height: 20px;
+	width: 20px;
+    cursor: pointer;
+}
+.mostrar-todo{
+    height: 20px;
+	width: 20px;
+    cursor: pointer;
+}
+#formMostrarTodo{
+    display: flex;
+    gap: 13px;
+}
